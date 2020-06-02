@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <title>Arda Kılıç Proje</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/style.css">
+
+    <style>
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .buttonDiv {
+            padding: 50px;
+            border: 1px solid black;
+            width: 400px;
+            height: 200px;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #canvas {
+
+            border: 1px solid black;
+            width: 1000px;
+            height: 800px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+
+        #explainer {
+            margin-bottom: 10px;
+        }
+
+        .circleBase {
+            display: inline-block;
+            border-radius: 50%;
+            border: 5px solid black;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+
+        .gameinfo {
+            font-size: 30px
+        }
+        .scoreBoard {
+            padding: 50px;
+            border: 1px solid black;
+            width: 400px;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+            height: 200px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <ul class="nav nav-tabs" id="navId">
+        <a class="navbar-brand" href="#">Game Company</a>
+        <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Games</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="game1.html">Game 1</a>
+                <a class="dropdown-item" href="game2.html">Game 2</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href="subscribe.html" class="nav-link">Contact Us</a>
+        </li>
+
+    </ul>
+
+
+
+    <div class="container">
+
+        <div id="explainer">
+
+            <h1>Clicker Game</h1>
+            <h2>Circles will appear in a random locations! Try to click much circles as possible in
+                1 minute to earn score!</h2>
+
+            <div class=row>
+
+                <div class="col-sm-6">
+                    <div class="buttonDiv">
+                        <h2>Game Control Menu (Using JQuery)</h2>
+                        <button id="startButton" class="btn btn-primary">Start!</button>
+                        <button id="stopButton" class="btn btn-primary">Stop!</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class = "scoreBoard">
+                        <div class="timer text-center gameinfo">
+                            Time: <span id="counter"></span>
+                        </div>
+    
+                        <div class="text-center gameinfo">
+                            Score: <span id="score">0</span>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div id="canvas"></div>
+
+
+    </div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./scripts/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        var score = 0;
+        var myTimer;
+        var circleChange;
+        var initalTime;
+
+        $(document).on("click", ".circleBase", function () {
+            score = score + 1;
+            document.getElementById('score').innerHTML = score;
+            console.log("test");
+
+        });
+
+        $(document).on("click", "#startButton", function () {
+
+            score = 0;
+            document.getElementById('score').innerHTML = 0;
+            circleChange = setInterval(changeCircles, 700);
+
+            initalTime = 60;
+            myTimer = setInterval(() => {
+
+                initalTime = initalTime - 1;
+                document.getElementById("counter").innerHTML = '0:' + initalTime;
+                if (initalTime <= 0) {
+                    clearInterval(myTimer);
+                    clearInterval(circleChange);
+                    document.getElementById('canvas').innerHTML = "Game Finished";
+                    document.getElementById("counter").innerHTML = '0:00';
+                }
+                // your code
+
+            }, 1000);
+
+
+        });
+
+        $(document).on("click", "#stopButton", function () {
+
+            clearInterval(myTimer);
+            clearInterval(circleChange);
+            initalTime = 0;
+            document.getElementById('canvas').innerHTML = "Game Stopped! Click Start! button to try again!";
+            document.getElementById("counter").innerHTML = '0:00';
+
+
+        });
+
+
+
+        function changeCircles() {
+            var str = "<div>";
+            var sum = 0;
+            var r1 = Math.floor(Math.random() * 256);
+            var g1 = Math.floor(Math.random() * 256);
+            var b1 = Math.floor(Math.random() * 256);
+            var randColor = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
+            for (var i = 0; i < 10; i++) {
+                const fontSize = 30;
+                const top = Math.floor(Math.random() * 30) + 1;
+                const left = Math.floor(Math.random() * 500) + 1;
+                const number = i + 1;
+                // str += "<div class='circleBase' style = 'top:"+top+"; left:"+left+"; background:" + randColor + "'>";
+                str += "<div class='circleBase' style='font-size: " + fontSize + "px; margin-left:" + left + "px; margin-top:" + top + "px; background:" + randColor + "; text-align: center;'>";
+                str += "<span class='val' style:'text-align: center; '>" + number + "</span></div>";
+            }
+
+            str += "</div>";
+            document.getElementById('canvas').innerHTML = str;
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

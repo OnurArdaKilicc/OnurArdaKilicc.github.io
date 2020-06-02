@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <title>Arda Kılıç Proje</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/style.css">
+
+</head>
+
+
+<body>
+
+    <ul class="nav nav-tabs" id="navId">
+        <a class="navbar-brand" href="#">Game Company</a>
+        <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Games</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="game1.html">Game 1</a>
+                <a class="dropdown-item" href="game2.html">Game 2</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href="subscribe.html" class="nav-link">Contact Us</a>
+        </li>
+    
+    </ul>
+
+
+
+    <div class="container">
+
+        <button id = "leftButton">Go Left</button>
+        <button id = "rightButton">Go Right</button>
+        <button id = "upButton">Go Up</button>
+        <button id = "downButton">Go Down</button>
+
+        <div style="background:#98bf21;height:100px;width:100px;position:absolute; top: 50%; right: 50%"></div>
+
+
+
+    </div>
+
+    
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./scripts/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#leftButton").click(function () {
+                stopEvent();
+                $("div").animate({ left: "-=50" });
+            });
+            $("#rightButton").click(function () {
+                stopEvent();
+                $("div").animate({ left: "+=50" });
+            });
+            $("#upButton").click(function () {
+                stopEvent();
+                $("div").animate({ top: "-=50" });
+            });
+            $("#downButton").click(function () {
+                stopEvent();
+                $("div").animate({ top: "+=50" });
+            });
+        });
+
+        function stopEvent(){
+            $("div").stop();
+        }
+
+
+    </script>
+
+</body>
+
+</html>
